@@ -64,6 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         "FOREIGN KEY (" + PRODLIST_PRODUCT_ID + ") REFERENCES " + PRODUCTS_TABLE_NAME + "(" + PRODUCTS_COLUMN_ID + ")," +
                         "CONSTRAINT " + PRODLIST_COLUMN_PRIMARY + " PRIMARY KEY (" + PRODLIST_LIST_ID + "," + PRODLIST_PRODUCT_ID + "))"
         );
+        db.close();
     }
 
     @Override
@@ -73,6 +74,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + LISTS_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + PRODLIST_TABLE_NAME);
         onCreate(db);
+        db.close();
     }
 
     public boolean insertProductIntoList(int listID, int productID) {
@@ -131,6 +133,8 @@ public class DBHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            db.close();
         }
         return null;
     }
@@ -201,6 +205,8 @@ public class DBHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            rs.close();
         }
     }
 
@@ -249,6 +255,8 @@ public class DBHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            rs.close();
         }
     }
 
