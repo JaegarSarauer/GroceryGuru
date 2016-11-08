@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.groceryguru.jaegar.groceryguru">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ProductCatalog" />
+        <activity android:name=".AddProduct" />
+        <activity android:name=".ListsCatalog" />
+        <activity android:name=".ProductView" />
+        <activity android:name=".ListsView" />
+        <activity android:name=".AddList" />
+        <activity android:name=".ProductCatalogAddList"></activity>
+    </application>
+
+</manifest>
