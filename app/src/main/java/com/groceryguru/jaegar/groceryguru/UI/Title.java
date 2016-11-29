@@ -1,4 +1,4 @@
-package com.groceryguru.jaegar.groceryguru;
+package com.groceryguru.jaegar.groceryguru.UI;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import com.groceryguru.jaegar.groceryguru.ContentHandlers.AddProduct;
+import com.groceryguru.jaegar.groceryguru.ContentHandlers.ListsCatalog;
+import com.groceryguru.jaegar.groceryguru.ContentHandlers.ProductCatalog;
+import com.groceryguru.jaegar.groceryguru.R;
 
 public class Title extends AppCompatActivity {
 

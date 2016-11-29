@@ -10,20 +10,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Title">
+        <activity android:name=".UI.Title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProductCatalog" />
-        <activity android:name=".AddProduct" />
-        <activity android:name=".ListsCatalog" />
-        <activity android:name=".ProductView" />
-        <activity android:name=".ListsView" />
-        <activity android:name=".AddList" />
-        <activity android:name=".ProductCatalogAddList"></activity>
+        <activity android:name=".ContentHandlers.ProductCatalog" />
+        <activity android:name=".ContentHandlers.AddProduct" />
+        <activity android:name=".ContentHandlers.ListsCatalog" />
+        <activity android:name=".UI.ProductView" />
+        <activity android:name=".UI.ListsView" />
+        <activity android:name=".ContentHandlers.AddList" />
+        <activity android:name=".ContentHandlers.ProductCatalogAddList"></activity>
     </application>
 
 </manifest>

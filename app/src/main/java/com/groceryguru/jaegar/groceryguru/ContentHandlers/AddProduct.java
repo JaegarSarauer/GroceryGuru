@@ -1,13 +1,13 @@
-package com.groceryguru.jaegar.groceryguru;
+package com.groceryguru.jaegar.groceryguru.ContentHandlers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.groceryguru.jaegar.groceryguru.R;
+import com.groceryguru.jaegar.groceryguru.WebQuery.ProductLookup;
 
 public class AddProduct extends AppCompatActivity {
     DBHelper database;

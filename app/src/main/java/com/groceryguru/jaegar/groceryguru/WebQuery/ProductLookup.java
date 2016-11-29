@@ -1,21 +1,10 @@
-package com.groceryguru.jaegar.groceryguru;
+package com.groceryguru.jaegar.groceryguru.WebQuery;
 
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.groceryguru.jaegar.groceryguru.ContentHandlers.AddProduct;
 import com.loopj.android.http.*;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import cz.msebera.android.httpclient.Header;
 

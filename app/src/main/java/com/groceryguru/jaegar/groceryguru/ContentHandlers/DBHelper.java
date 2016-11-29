@@ -1,4 +1,4 @@
-package com.groceryguru.jaegar.groceryguru;
+package com.groceryguru.jaegar.groceryguru.ContentHandlers;
 
 /**
  * Created by Jaegar on 2016-10-23.
@@ -13,6 +13,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import com.groceryguru.jaegar.groceryguru.Content.List;
+import com.groceryguru.jaegar.groceryguru.Content.Product;
 
 public class DBHelper extends SQLiteOpenHelper {
 

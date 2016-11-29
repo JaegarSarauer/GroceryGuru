@@ -1,4 +1,4 @@
-package com.groceryguru.jaegar.groceryguru;
+package com.groceryguru.jaegar.groceryguru.ContentHandlers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.groceryguru.jaegar.groceryguru.Content.List;
+import com.groceryguru.jaegar.groceryguru.R;
+import com.groceryguru.jaegar.groceryguru.UI.ListsView;
 
 import java.util.Arrays;
 
@@ -26,7 +30,7 @@ public class ListsCatalog extends AppCompatActivity {
         // Create a message handling object as an anonymous class.
         AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                Intent intent = new Intent(ListsCatalog.this, com.groceryguru.jaegar.groceryguru.ListsView.class);
+                Intent intent = new Intent(ListsCatalog.this, ListsView.class);
                 List l = database.getListByIDList((int)id);
                 l.products = Arrays.asList(database.getAllProductsInList((int)id));
                 l.ID = (int)id;

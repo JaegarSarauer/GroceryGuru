@@ -1,10 +1,14 @@
-package com.groceryguru.jaegar.groceryguru;
+package com.groceryguru.jaegar.groceryguru.ContentHandlers;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.groceryguru.jaegar.groceryguru.Content.CheckedAdapter;
+import com.groceryguru.jaegar.groceryguru.Content.List;
+import com.groceryguru.jaegar.groceryguru.Content.Product;
+import com.groceryguru.jaegar.groceryguru.R;
 
 public class ProductCatalogAddList extends AppCompatActivity {
     ListView productsList;

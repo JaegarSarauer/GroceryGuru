@@ -1,4 +1,4 @@
-package com.groceryguru.jaegar.groceryguru;
+package com.groceryguru.jaegar.groceryguru.Content;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class List implements Serializable {
     private static final long serialVersionUID = -7060210544600464481L;
     public String name;
     public int ID = -1;
-    java.util.List<Product> products;
+    public java.util.List<Product> products;
 
     public List(String name, Product ... p) {
         this.name = name;

@@ -1,17 +1,18 @@
-package com.groceryguru.jaegar.groceryguru;
+package com.groceryguru.jaegar.groceryguru.UI;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.groceryguru.jaegar.groceryguru.Content.CheckedAdapter;
+import com.groceryguru.jaegar.groceryguru.ContentHandlers.DBHelper;
+import com.groceryguru.jaegar.groceryguru.Content.List;
+import com.groceryguru.jaegar.groceryguru.Content.Product;
+import com.groceryguru.jaegar.groceryguru.ContentHandlers.ProductCatalogAddList;
+import com.groceryguru.jaegar.groceryguru.R;
 
 public class ListsView extends AppCompatActivity {
     DBHelper database;

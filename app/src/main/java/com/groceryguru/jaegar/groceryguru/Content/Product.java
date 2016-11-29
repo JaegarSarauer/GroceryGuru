@@ -1,4 +1,4 @@
-package com.groceryguru.jaegar.groceryguru;
+package com.groceryguru.jaegar.groceryguru.Content;
 
 import android.os.Parcel;
 import android.os.Parcelable;

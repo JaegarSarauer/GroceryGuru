@@ -1,9 +1,11 @@
-package com.groceryguru.jaegar.groceryguru;
+package com.groceryguru.jaegar.groceryguru.UI;
 
-import android.icu.text.NumberFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.groceryguru.jaegar.groceryguru.Content.Product;
+import com.groceryguru.jaegar.groceryguru.R;
 
 
 public class ProductView extends AppCompatActivity {
