@@ -14,23 +14,25 @@ public class Product implements Serializable {
     public String name;
     public int price;
     public String notes;
+    public String upc;
     public boolean selected;
 
-    public Product(String name, int price, String note) {
+    public Product(String name, int price, String note, String upc) {
         this.name = name;
         this.price = price;
         this.notes = note;
-
+        this.upc = upc;
     }
 
     public Product() {
         name = "";
         price = 0;
         notes = "";
+        upc = "";
     }
 
     @Override
     public String toString() {
-        return "Name: " + name + "\nPrice: $" + price + "\nNotes: " + notes;
+        return "Name: " + name + "\nPrice: $" + price + "\nNotes: " + notes + "\nUPC Code: " + upc;
     }
 }

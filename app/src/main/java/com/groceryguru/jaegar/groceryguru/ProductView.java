@@ -1,8 +1,10 @@
 package com.groceryguru.jaegar.groceryguru;
 
+import android.icu.text.NumberFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
 
 public class ProductView extends AppCompatActivity {
 
@@ -11,6 +13,7 @@ public class ProductView extends AppCompatActivity {
     TextView name;
     TextView price;
     TextView notes;
+    TextView upc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,11 +23,13 @@ public class ProductView extends AppCompatActivity {
         name = (TextView) findViewById(R.id.product_view_name);
         price = (TextView) findViewById(R.id.product_view_price);
         notes = (TextView) findViewById(R.id.product_view_notes);
+        upc = (TextView) findViewById(R.id.product_view_upc);
 
         if (product != null) {
-            name.setText(product.name);
-            price.setText(Integer.toString(product.price));
-            notes.setText(product.notes);
+            name.setText("Name: " + product.name);
+            price.setText("$" + Double.toString(product.price));
+            notes.setText("Notes: " + product.notes);
+            upc.setText("UPC Code: " + product.upc);
         }
 
     }

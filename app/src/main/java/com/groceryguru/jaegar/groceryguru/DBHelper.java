@@ -22,6 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String PRODUCTS_COLUMN_NAME = "name";
     public static final String PRODUCTS_COLUMN_PRICE = "price";
     public static final String PRODUCTS_COLUMN_NOTES = "notes";
+    public static final String PRODUCTS_COLUMN_UPC = "upc";
 
     public static final String LISTS_TABLE_NAME = "lists";
     public static final String LISTS_COLUMN_ID = "id";
@@ -34,9 +35,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String PRODLIST_PRODUCT_CHECKED = "productChecked";
     private HashMap hp;
 
-    public DBHelper(Context context)
-    {
-        super(context, DATABASE_NAME , null, 9);
+    public DBHelper(Context context) {
+        super(context, DATABASE_NAME , null, 14);
+        if (db == null)
+            db = getWritableDatabase();
     }
 
     @Override
@@ -46,7 +48,8 @@ public class DBHelper extends SQLiteOpenHelper {
                         "(" + PRODUCTS_COLUMN_ID + " integer primary key," +
                         PRODUCTS_COLUMN_NAME + " text," +
                         PRODUCTS_COLUMN_PRICE + " integer," +
-                        PRODUCTS_COLUMN_NOTES + " text)"
+                        PRODUCTS_COLUMN_NOTES + " text," +
+                        PRODUCTS_COLUMN_UPC + " text)"
         );
 
         db.execSQL(
@@ -64,7 +67,15 @@ public class DBHelper extends SQLiteOpenHelper {
                         "FOREIGN KEY (" + PRODLIST_PRODUCT_ID + ") REFERENCES " + PRODUCTS_TABLE_NAME + "(" + PRODUCTS_COLUMN_ID + ")," +
                         "CONSTRAINT " + PRODLIST_COLUMN_PRIMARY + " PRIMARY KEY (" + PRODLIST_LIST_ID + "," + PRODLIST_PRODUCT_ID + "))"
         );
-        db.close();
+        
+    }
+
+    SQLiteDatabase db;
+
+    private void attemptDatabase() {
+        if (db == null || !db.isOpen()) {
+            db = this.getWritableDatabase();
+        }
     }
 
     @Override
@@ -74,53 +85,55 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + LISTS_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + PRODLIST_TABLE_NAME);
         onCreate(db);
-        db.close();
+        
     }
 
     public boolean insertProductIntoList(int listID, int productID) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        attemptDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(PRODLIST_LIST_ID, listID);
         contentValues.put(PRODLIST_PRODUCT_ID, productID);
         contentValues.put(PRODLIST_PRODUCT_CHECKED, 0);
         db.insert(PRODLIST_TABLE_NAME, null, contentValues);
-        db.close();
+        
         return true;
     }
 
     public boolean insertProductIntoList(int listID, int productID, boolean checked) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        attemptDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(PRODLIST_LIST_ID, listID);
         contentValues.put(PRODLIST_PRODUCT_ID, productID);
         contentValues.put(PRODLIST_PRODUCT_CHECKED, checked ? 1 : 0);
         db.insert(PRODLIST_TABLE_NAME, null, contentValues);
-        db.close();
+        
         return true;
     }
 
     public boolean updateProductCheckInList(int listID, int prodID, boolean checked) {
+        attemptDatabase();
         listID += 1;
         String strSQL = "UPDATE " + PRODLIST_TABLE_NAME + " SET " + PRODLIST_PRODUCT_CHECKED + " = " +
                 (checked ? 1 : 0) + " WHERE " + PRODLIST_LIST_ID + " = " + listID + " AND " +
                 PRODLIST_PRODUCT_ID + " = " + prodID;
 
-        this.getWritableDatabase().execSQL(strSQL);
+        db.execSQL(strSQL);
         return true;
     }
 
     public boolean removeAllProductsInList(int listID) {
+        attemptDatabase();
         listID += 1;
         String str = "DELETE FROM " + PRODLIST_TABLE_NAME +
                 "WHERE " + PRODLIST_LIST_ID + " = " + listID;
 
-        this.getWritableDatabase().execSQL(str);
+        db.execSQL(str);
         return true;
     }
 
     public Product getProductFromList(int listID, int productID) {
+        attemptDatabase();
         listID += 1; productID += 1;
-        SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from " + PRODLIST_TABLE_NAME + " where " + PRODLIST_LIST_ID + " = "+listID+" AND " + PRODLIST_PRODUCT_ID + " = " + productID + "", null );
         res.moveToFirst();
         Log.d("COUNTS", "amount " + res.getCount());
@@ -134,15 +147,15 @@ public class DBHelper extends SQLiteOpenHelper {
             e.printStackTrace();
             return null;
         } finally {
-            db.close();
+            
         }
         return null;
     }
 
     public Product[] getAllProductsInList(int listID) {
+        attemptDatabase();
         listID += 1;
         java.util.List<Product> prods = new java.util.ArrayList<Product>();
-        SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from " + PRODLIST_TABLE_NAME + " where " + PRODLIST_LIST_ID + "="+listID+"", null );
         res.moveToFirst();
         Log.d("WHY NOT????", "" + res.getCount());
@@ -161,35 +174,36 @@ public class DBHelper extends SQLiteOpenHelper {
         return prods.toArray(new Product[prods.size()]);
     }
 
-    public boolean insertProduct(String name, double price, String notes) {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public boolean insertProduct(String name, double price, String notes, String UPC) {
+        attemptDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(PRODUCTS_COLUMN_NAME, name);
         contentValues.put(PRODUCTS_COLUMN_PRICE, price);
         contentValues.put(PRODUCTS_COLUMN_NOTES, notes);
+        contentValues.put(PRODUCTS_COLUMN_UPC, UPC);
         db.insert(PRODUCTS_TABLE_NAME, null, contentValues);
-        db.close();
+        
         return true;
     }
 
     public long insertList(String name) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        attemptDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(LISTS_COLUMN_NAME, name);
         long rowID = db.insert(LISTS_TABLE_NAME, null, contentValues);
-        db.close();
+        
         return rowID;
     }
 
     public Cursor getListByID(int id) {
+        attemptDatabase();
         id += 1;
-        SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from " + LISTS_TABLE_NAME + " where " + LISTS_COLUMN_ID + "="+id+"", null );
         return res;
     }
 
     public Cursor getListByName(String name) {
-        SQLiteDatabase db = this.getReadableDatabase();
+        attemptDatabase();
         Cursor res =  db.rawQuery( "select * from " + LISTS_TABLE_NAME + " where " + LISTS_COLUMN_NAME + "="+name+"", null );
         return res;
     }
@@ -251,7 +265,8 @@ public class DBHelper extends SQLiteOpenHelper {
             String name = rs.getString(rs.getColumnIndexOrThrow(DBHelper.PRODUCTS_COLUMN_NAME));
             int price = rs.getInt(rs.getColumnIndexOrThrow(DBHelper.PRODUCTS_COLUMN_PRICE));
             String notes = rs.getString(rs.getColumnIndexOrThrow(DBHelper.PRODUCTS_COLUMN_NOTES));
-            return new Product(name, price, notes);
+            String upc = rs.getString(rs.getColumnIndexOrThrow(DBHelper.PRODUCTS_COLUMN_UPC));
+            return new Product(name, price, notes, upc);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
